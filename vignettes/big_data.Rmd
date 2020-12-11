@@ -1,0 +1,89 @@
+---
+title: "04 Big Data Analysis"
+author: "Darius Görgen"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{04 Big Data Analysis}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+   %\VignetteDepends{ggplot2, plotly, stringr}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning=F, message=F, cache = F)
+```
+
+```{r setup}
+library(sf)
+library(mapme.forest)
+```
+
+
+The previously demonstrated R routines base on the `raster` package which uses
+quite a lot of RAM and this can be inefficient when it comes to the analysis of
+very large rasters. 
+In order to make the analysis of extensive regions feasible we developed a routine
+using [GRASS GIS](https://grass.osgeo.org/) for the complete processing chain from
+pre-processing GFW data to the extraction of zonal statistics.
+This routine is very RAM efficient rendering the analysis of large areas possible
+even when only restricted hardware is available (8GB of RAM should be enough for most
+use cases). 
+
+Equally to most of the other functions, it is expected that the path to the GDAL
+binaries is exposed in your environment variable (refer to the README of this package
+for more information). Additionally, the path to a working installation of GRASS GIS 
+version >=7.0.0 is required for the function to work properly. Internally, the 
+function uses the [`r.area`](https://grass.osgeo.org/grass78/manuals/addons/r.area.html) 
+addon, which will be installed automatically if it is not present in the specified 
+addon path option.
+
+As inputs to the function it is required to specify the path to the tree cover,
+loss year and CO2 emission files which cover the area of the polygons you are interested in.
+We advise you to use the files you obtained by calling `downloadGFW()` with your 
+area of interest, however, also raster files obtained in another way are suitable for 
+the routine. 
+
+The function call with the sample data from this package then looks like this:
+
+```{r, eval = F}
+# get the file paths to the raster files
+treeCover = system.file("extdata", "pkgTest_treecover2000.tif", package = "mapme.forest")
+lossYear = system.file("extdata", "pkgTest_lossyear.tif", package = "mapme.forest")
+co2Layer = system.file("extdata", "pkgTest_co2_emission.tif", package = "mapme.forest")
+# read the area of interest
+roi = st_read(system.file("extdata", "aoi_polys.gpkg", package = "mapme.forest"))
+
+grass = "/usr/lib/grass78"
+
+roi_stats = statsGRASS(grass = grass, 
+                       addon_base = "./data-raw/addons", 
+                       areas = roi[1,], 
+                       tree_cover = treeCover, 
+                       tree_loss = lossYear, 
+                       tree_co2 = co2Layer, 
+                       idcol =  "id", 
+                       thresholdClump = 10, 
+                       thresholdCover = 50, 
+                       years = 2001:2018, 
+                       saveRaster = F)
+
+```
+
+This will deliver us the sf-object which entered the function with its dataframe
+amended by the yearly forest cover area, tree cover loss area (both in ha) and 
+CO2 emissions. Additionally, we can turn the `saveRaster` switch to TRUE and
+specify a `outdir` variable in cases we want the raster output be written to disk.
+The first layer then represents the raw GFW tree cover with values between 0 and 100,
+the second layer the loss year layer, in this case with values between 0 and 18, 
+the third layer the values of the CO2 emission equivalent, and then as many layers
+as specified in the years options starting from the year 2000.
+
+As mentioned above, this function runs very efficiently. You can hand it a very
+high number of polygons simultaneously, each uniquely identified by the value in the
+column you specify in `idcol`. Make sure the raster files you hand to the function
+do cover all polygons and the function will clip and process for each polygon
+after another. For the cases you selected to save the resulting raster files, 
+inside the specified `outdir` you will find a `GTiff` for each polygon named 
+according to the value in `idcol`.
+

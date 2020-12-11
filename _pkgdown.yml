@@ -1,0 +1,13 @@
+home:
+  title: An R package for deforestation analysis
+  description: This package helps you to analyses deforestation dynamics around the globe using Global Forest Watch (GFW) data
+
+destination: docs
+
+authors:
+  MapTailor GbR:
+    href: https://maptailor.net/
+  Financed by KfW Development Bank:
+    href: https://www.kfw-entwicklungsbank.de/International-financing/KfW-Entwicklungsbank/
+
+

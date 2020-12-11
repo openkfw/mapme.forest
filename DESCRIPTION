@@ -1,0 +1,60 @@
+Package: mapme.forest
+Type: Package
+Title: Package to support project evaluation and planning in the forest sector
+Version: 1.0
+Authors@R: c(person("KfW Bankengruppe", role = c("cre", "cph"), email = "FZ-Evaluierung@kfw.de"),
+             person(given = "Darius", family = "Görgen", role = "aut", email = "darius.goergen@maptailor.net"),
+             person(given = "Fabian", family = "Löw", role = "aut", email = "fabian.loew@maptailor.net"))
+Maintainer: MapTailor Geospatial Consulting GbR <info@maptailor.net>
+Description: This package is a collection of functions to support projects
+  of international development cooperation in planning and evaluating 
+  projects in the forest sector. It helps to understand dynamics of 
+  deforestation globally by using Global Forest Watch data sets and 
+  user specified areas of interest. The packages provides a common 
+  interface to derive reproducible statistics on deforestation and
+  fragmentation indicators with a convenient user interface. The 
+  development of the package was financed by the KFW Development Bank 
+  and realised by MapTailor Geospatial Consulting GbR.
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+Depends: 
+   R (>= 3.5)
+Imports: 
+    sp,
+    sf,
+    parallel,
+    raster,
+    SDMTools (>= 1.1.221),
+    trend,
+    dplyr,
+    tibble,
+    exactextractr,
+    curl,
+    tidyr,
+    igraph,
+    utils,
+    methods,
+    rgrass7,
+    stringr,
+    rgdal,
+    lwgeom
+RoxygenNote: 7.1.1
+Suggests: 
+    knitr,
+    rmarkdown,
+    stars,
+    ggplot2,
+    magrittr,
+    plotly,
+    tmap,
+    R.utils,
+    testthat
+SystemRequirements: 
+    GDAL (>= 2.0.1), 
+    GEOS (>= 3.4.0),
+    PROJ (>= 4.8.0),
+    GRASS (>= 7.0.0)
+VignetteBuilder: knitr
+Remotes: 
+    jjvanderwal/SDMTools
