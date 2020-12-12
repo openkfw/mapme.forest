@@ -15,4 +15,4 @@
 ^vignettes/area_stats_cache$
 ^vignettes/frag_stats_cache$
 ^LICENSE\.md$
-^\.github/workflows$
+^\.github$

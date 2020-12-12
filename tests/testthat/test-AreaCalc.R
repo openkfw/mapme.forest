@@ -35,6 +35,7 @@ describe("testing area calculation", {
                    area_2002 = 0.7219881))
     })
     it("parallel mode",{
+      skip_on_os("windows")
       expect_equal(
         round(
           st_drop_geometry(
@@ -42,7 +43,7 @@ describe("testing area calculation", {
                      studysite = studysite[1,],
                      latlon = TRUE,
                      polyName = "id",
-                     ncores = 1,
+                     ncores = 2,
                      saveCSV = FALSE,
                      years = 2000:2002)), 7),
         data.frame(id = 1,
@@ -70,6 +71,7 @@ describe("testing area calculation", {
                    area_2002 = 0.7219881))
     })
     it("parallel mode",{
+      skip_on_os("windows")
       expect_equal(
         round(
           st_drop_geometry(
@@ -77,7 +79,7 @@ describe("testing area calculation", {
                      studysite = studysite[1,],
                      latlon = TRUE,
                      polyName = "id",
-                     ncores = 1,
+                     ncores = 2,
                      saveCSV = FALSE,
                      years = 2000:2002)), 7),
         data.frame(id = 1,

@@ -137,13 +137,15 @@ by specifying `FragStats = "all"` which conveniently also is the default setting
 
 # read in polygons to extract fragmentation statistics for
 aoi = st_read(system.file("extdata", "aoi_polys.gpkg", package = "mapme.forest"))
+ncores = 2
+if("Windows" %in% Sys.info()['sysname']) ncores = 1
 
 frag_statistics = FragStatsCalc(inputRasterFiles = treeCover_yearly, 
                                 latlon = T, 
                                 polyName = "id", 
                                 studysite = aoi, 
                                 FragStats = "all", 
-                                ncores = 2)
+                                ncores = ncores)
 
 cat("Number of rows: ", nrow(frag_statistics))
 cat("Number of columns: ",ncol(frag_statistics))
@@ -345,7 +347,7 @@ grid_fragstats = FragStatsCalc(inputRasterFiles = treeCover_proj[[1]],
                                polyName = "id",
                                studysite = polys,
                                FragStats = "patch.density",
-                               ncores = 2)
+                               ncores = ncores)
 results = st_drop_geometry(grid_fragstats)
 result_raster = raster(matrix(data = results$patch.density_V1, ncol = ncols, nrow = nrows))
 result_raster[] = NA

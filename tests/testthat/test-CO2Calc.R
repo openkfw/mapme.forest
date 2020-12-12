@@ -27,6 +27,7 @@ describe("testing area calculation", {
          data.frame(id = 1, co2_2009 = 0, co2_2010 = 7.3))
     })
     it("parallel mode",{
+      skip_on_os("windows")
       expect_equal(
         round(
           st_drop_geometry(CO2Calc(inputForestMap = inputForestMap[[9:10]],
@@ -61,7 +62,7 @@ area_stats = CO2Calc(inputForestMap = inputForestMap[[1:3]],
                      studysite = studysite[1:4,],
                      inputCO2Map = inputCO2Map,
                      polyName = "id",
-                     ncores = 2,
+                     ncores = 1,
                      saveCSV = FALSE,
                      years = 2000:2002)
 

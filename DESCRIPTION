@@ -1,12 +1,12 @@
 Package: mapme.forest
 Type: Package
-Title: Package to support project evaluation and planning in the forest sector
+Title: Package to Support Project Evaluation and Planning in the Forest Sector
 Version: 1.0
 Authors@R: c(person("KfW Bankengruppe", role = c("cre", "cph"), email = "FZ-Evaluierung@kfw.de"),
              person(given = "Darius", family = "Görgen", role = "aut", email = "darius.goergen@maptailor.net"),
              person(given = "Fabian", family = "Löw", role = "aut", email = "fabian.loew@maptailor.net"))
-Maintainer: MapTailor Geospatial Consulting GbR <info@maptailor.net>
-Description: This package is a collection of functions to support projects
+Maintainer: KfW Bankengruppe <FZ-Evaluierung@kfw.de>
+Description: This collection of R functions can be used to support projects
   of international development cooperation in planning and evaluating 
   projects in the forest sector. It helps to understand dynamics of 
   deforestation globally by using Global Forest Watch data sets and 
@@ -56,5 +56,4 @@ SystemRequirements:
     PROJ (>= 4.8.0),
     GRASS (>= 7.0.0)
 VignetteBuilder: knitr
-Remotes: 
-    jjvanderwal/SDMTools
+Remotes: github::jjvanderwal/SDMTools

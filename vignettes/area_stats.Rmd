@@ -135,19 +135,21 @@ proj_TC_yearly = projectRaster(treeCover_yearly, crs = utm, method = "ngb")
 # reproject the regions of interest
 proj_roi = sf::st_transform(roi, utm)
 
+ncores = 2
+if("Windows" %in% Sys.info()['sysname']) ncores = 1
 # area calculation for unprojected raster
 result_latlon = AreaCalc(treeCover_yearly,
                          studysite = roi[2,],
                          latlon=TRUE,
                          polyName = "id",
-                         ncores = 2,
+                         ncores = ncores,
                          years = 2000:2018)
 # area calculation fo projected raster
 result_proj = AreaCalc(proj_TC_yearly,
                        studysite = proj_roi[2,],
                        latlon=FALSE,
                        polyName = "id",
-                       ncores = 2,
+                       ncores = ncores,
                        years = 2000:2018)
 # rescale area values to ha for unprojected results
 area_latlon = st_drop_geometry(result_latlon) %>%
@@ -225,7 +227,7 @@ loss_area = LossCalc(inputForestMap = treeCover_yearly,
                      studysite = result_latlon,
                      latlon = TRUE,
                      polyName = "id",
-                     ncores = 2,
+                     ncores = ncores,
                      years = 2000:2018)
 ```
 
@@ -240,7 +242,7 @@ co2_emission = CO2Calc(inputForestMap = treeCover_yearly,
                        inputCO2Map = co2Layer,
                        studysite = result_latlon,
                        polyName = "id",
-                       ncores = 2,
+                       ncores = ncores,
                        years = 2000:2018)
 ```
 

@@ -38,6 +38,7 @@ describe("testing area calculation", {
                    loss_2010 = 0.0002058))
     })
     it("parallel mode",{
+      skip_on_os("windows")
       expect_equal(
         round(
           st_drop_geometry(
@@ -77,6 +78,7 @@ describe("testing area calculation", {
                    loss_2010 = 176.1))
     })
     it("parallel mode",{
+      skip_on_os("windows")
       expect_equal(
         round(
           st_drop_geometry(
@@ -115,7 +117,7 @@ area_stats = LossCalc(inputForestMap = inputForestMap[[1:3]],
                       studysite = studysite[1:4,],
                       latlon = TRUE,
                       polyName = "id",
-                      ncores = 2,
+                      ncores = 1,
                       saveCSV = FALSE,
                       years = 2000:2002)
 

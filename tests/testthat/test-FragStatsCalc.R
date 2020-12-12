@@ -21,7 +21,7 @@ result = FragStatsCalc(inputRasterFiles = inputRasterFiles,
                        FragStats = "all",
                        latlon = TRUE,
                        polyName = "id",
-                       ncores = 2,
+                       ncores = 1,
                        saveCSV = FALSE)
 
 
@@ -37,6 +37,7 @@ describe("testing frag stats calculation", {
                                   saveCSV = FALSE))
     })
     it("parallel mode",{
+      skip_on_os("windows")
       expect_silent(FragStatsCalc(inputRasterFiles = inputRasterFiles[[1:2]],
                                   studysite = studysite[1:2,],
                                   FragStats = "all",
@@ -58,6 +59,7 @@ describe("testing frag stats calculation", {
                                   saveCSV = FALSE))
     })
     it("parallel mode",{
+      skip_on_os("windows")
       expect_silent(FragStatsCalc(inputRasterFiles = inputRasterFiles_proj[[1:2]],
                                   studysite = studysite_proj[1:2,],
                                   FragStats = "all",
