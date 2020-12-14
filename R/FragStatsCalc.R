@@ -109,7 +109,7 @@
 #'                                      "prop.landscape", "patch.density"),
 #'                        latlon = TRUE,
 #'                        polyName = "id",
-#'                        ncores = 2,
+#'                        ncores = 1,
 #'                        saveCSV = FALSE)
 #' str(result)
 #'

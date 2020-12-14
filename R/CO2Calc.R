@@ -46,7 +46,7 @@
 #'                  inputCO2Map = co2Raster,
 #'                  studysite = aoi[1,],
 #'                  polyName = "id",
-#'                  ncores = 2,
+#'                  ncores = 1,
 #'                  saveCSV = FALSE,
 #'                  years = 2000:2018)
 #' str(result)
