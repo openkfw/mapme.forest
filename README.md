@@ -35,7 +35,7 @@ In our installation instruction we assume that you are going to use R Studio as 
 - download and install R Studio from https://rstudio.com/products/rstudio/download/#download
 - download and install Rtools from https://cran.r-project.org/bin/windows/Rtools and make Rtools available on the PATH variable
 - install the devtools and git2r packages with 'install.packages(c("devtools", "git2r"))'
-- install forestIndicators with the following command replacing <user> and <pass> with your username and password: `devtools::install_git("https://innersource.stackato.de/gans/deforestation", credentials = git2r::cred_user_pass("<user>", "<pass>")` and close R Studio afterwards
+- install mapme.forest with the following command: `devtools::install_github("openkfw/mapme.forest")` and close R Studio afterwards
 
 Now the package has been sucessfully installed, however, you are not necessarily 100% ready to use it. Since some of the function use gdal system calls we additionally need a valid gdal installation on your machine. 
 - go to https://trac.osgeo.org/osgeo4w/ and download the osgeo4w.exe and run it
